@@ -2,6 +2,7 @@ package com.quiz.lesson03.bo;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,21 @@ public class RealEstateBO {
 	
 	public List<RealEstate> getRealEstateListByAreaPrice(int area, int price) {
 		return realEstateMapper.selectRealEstateListByAreaPrice(area, price);
+	}
+	
+	public int addRealEstate(RealEstate realEstate) {
+		return realEstateMapper.insertRealEstate(realEstate);
+	}
+	
+	public int addRealEstateAsField(
+			int realtorId,
+			String address, 
+			int area, 
+			String type,
+			int price, 
+			Integer rentPrice) {
+		
+		return realEstateMapper.insertRealEstateAsField(realtorId, address, area, type, price, rentPrice);
 	}
 }
 
