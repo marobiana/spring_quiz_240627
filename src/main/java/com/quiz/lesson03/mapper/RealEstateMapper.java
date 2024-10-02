@@ -39,6 +39,13 @@ public interface RealEstateMapper {
 			@Param("type") String type22,
 			@Param("price") int price222, 
 			@Param("rentPrice") Integer rentPrice333);
+	
+	// input: id, type, price
+	// output: int
+	public int updateRealEstateById(
+			@Param("id") int id, 
+			@Param("type") String type, 
+			@Param("price") int price);
 }
 
 
