@@ -37,4 +37,7 @@ public class WeatherHistoryController {
 	public String addWeatherView() {
 		return "weather_history/addWeather";
 	}
+	
+	// DB에 저장 => 목록 화면
+	// /weather-history/add-weather
 }
