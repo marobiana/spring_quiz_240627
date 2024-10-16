@@ -39,6 +39,35 @@
 			</nav>
 			<section class="weather-history col-10 pt-4">
 				<h3>과거 날씨</h3>
+				
+				<table class="table text-center">
+					<thead>
+						<tr>
+							<th>날짜</th>
+							<th>날씨</th>
+							<th>기온</th>
+							<th>강수량</th>
+							<th>미세먼지</th>
+							<th>풍속</th>
+						</tr>	
+					</thead>
+					<tbody>
+						<tr th:each="history : ${weatherHistoryList}">
+							<td th:text="${#temporals.format(history.date, 'yyyy년 M월 d일')}">-</td>
+							<td th:switch="${history.weather}">
+								<img th:case="'맑음'" src="/img/sunny.jpg" alt="맑음">
+								<img th:case="'비'" src="/img/rainy.jpg" alt="비">
+								<img th:case="'흐림'" src="/img/cloudy.jpg" alt="흐림">
+								<img th:case="'구름조금'" src="/img/partlyCloudy.jpg" alt="구름조금">
+								<span th:case="*" th:text="${history.weather}"></span>
+							</td>
+							<td th:text="|${history.temperatures}℃|"></td>
+							<td th:text="|${history.precipitation}mm|"></td>
+							<td th:text="${history.microDust}"></td>
+							<td th:text="${history.windSpeed} + 'km/h'"></td>
+						</tr>
+					</tbody>
+				</table>
 			</section>
 		</div>
 		<footer class="d-flex align-items-center">
