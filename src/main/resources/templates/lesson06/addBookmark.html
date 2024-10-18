@@ -17,7 +17,7 @@
 			<input type="text" id="name" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="url">제목</label>
+			<label for="url">URL</label>
 			<input type="text" id="url" class="form-control">
 		</div>
 		<button id="addBtn" type="button" class="btn btn-success btn-block">추가</button>
@@ -42,7 +42,13 @@
 					return;
 				}
 				
-				// TODO 주소 http, https
+				// 주소 http, https
+				// http도 아니고, https도 아니고 => 잘못된 주소
+				if (url.startsWith("http://") == false 
+						&& url.startsWith("https://") == false) {
+					alert("주소 형식이 잘못되었습니다.");
+					return;
+				}
 				
 				// AJAX 통신
 				$.ajax({
@@ -52,8 +58,15 @@
 					, data:{"name":name, "url":url}
 					
 					// response - callback
-					, success:function(data) { 
-						alert(data);
+					, success:function(data) { // AJAX 응답은 String => jquery의 함수가 JSON임을 알면 => dictionary
+						//alert(data.code);
+						if (data.code == 200) {
+							// 화면 이동
+							location.href = "/lesson06/quiz01/bookmark-list-view";
+						} else {
+							// 로직상 실패
+							alert(data.error_message); // 에러 원인
+						}
 					}
 					, error:function(e) {
 						alert("추가하는데 실패했습니다.");
