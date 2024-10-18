@@ -21,10 +21,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>[[${bookmarkList}]]</td>
-					<td>-</td>
-					<td>-</td>
+				<tr th:each="bookmark : ${bookmarkList}">
+					<td th:text="${bookmark.id}"></td>
+					<td th:text="${bookmark.name}">-</td>
+					<td>
+						<a th:href="${bookmark.url}" target="_blank" th:text="${bookmark.url}"></a>
+					</td>
 				</tr>			
 			</tbody>
 		</table>
