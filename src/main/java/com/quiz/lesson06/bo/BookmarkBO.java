@@ -30,6 +30,10 @@ public class BookmarkBO {
 		// 비어있으면 중복이 아니므로, empty true => false
 		return bookmarkList.isEmpty() == false;
 	}
+	
+	public int deleteBookmarkById(int id) {
+		return bookmarkMapper.deleteBookmarkById(id);
+	}
 }
 
 

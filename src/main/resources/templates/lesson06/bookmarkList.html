@@ -28,10 +28,58 @@
 					<td>
 						<a th:href="${bookmark.url}" target="_blank" th:text="${bookmark.url}"></a>
 					</td>
-					<td><button type="button" class="del-btn btn btn-danger">삭제</button></td>
+					<td>
+						<!-- 1) value에 id 넣기 -->
+						<!-- <button type="button" class="del-btn btn btn-danger" th:value="${bookmark.id}">삭제</button> -->
+						
+						<!-- 2) data로 값 넣기 -->
+						<button type="button" class="del-btn btn btn-danger" th:data-bookmark-id="${bookmark.id}">삭제</button>
+					</td>
 				</tr>			
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+		$(document).ready(function() {
+			// 삭제
+			$(".del-btn").on('click', function(e) {
+				// 1) value를 이용
+				//let id = $(this).val();
+				//let id = $(this).attr("value");
+				//let id = e.target.value;
+				
+				// 2) data를 이용(여러 항목 추가 가능)
+				// 태그   th:data-bookmark-id
+				// js    .data("bookmark-id")
+				let id = $(this).data("bookmark-id");
+				//alert(id);
+				
+				$.ajax({
+					// request
+					type:"delete"
+					, url:"/lesson06/quiz01/delete-bookmark"
+					, data:{"id":id}
+					
+					// response
+					, success:function(data) {
+						// result
+						if (data.result == "성공") {
+							// 새로고침 스크롤 유지, 데이터 다시 get
+							location.reload(true);
+						} else if (data.code == 500) {
+							alert(data.error_message);
+						}
+					}
+					, error:function(e) {
+						alert("삭제하는데 실패했습니다.");
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
+
+
+
