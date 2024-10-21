@@ -19,4 +19,16 @@ public interface BookmarkMapper {
 	// input: X
 	// output: List<Bookmark>
 	public List<Bookmark> selectBookmarkList();
+	
+	// input: url
+	// output: List<Bookmark> 
+	public List<Bookmark> selectBookmarkByUrl(String url);
 }
+
+
+
+
+
+
+
+

@@ -53,13 +53,30 @@ public class Lesson06Quiz01Controller {
 	@GetMapping("/bookmark-list-view")
 	public String bookmarkListView(Model model) {
 		// db select => List
-		List<Bookmark> bookmarkList = bookmarkBO.selectBookmarkList();
+		List<Bookmark> bookmarkList = bookmarkBO.getBookmarkList();
 		
 		// Model에 담기
 		model.addAttribute("bookmarkList", bookmarkList);
 		
 		// view 화면 이동
 		return "lesson06/bookmarkList";
+	}
+	
+	// URL 중복확인 - AJAX 요청
+	@ResponseBody
+	@PostMapping("/is-duplicate-url")
+	public Map<String, Object> isDuplicateUrl(
+			@RequestParam("url") String url) {
+		
+		// db select
+		boolean isDuplicate = bookmarkBO.isDuplicateUrl(url);
+		
+		// 응답
+		// {"code":200, "is_duplicate":true}
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("is_duplicate", isDuplicate);
+		return result;
 	}
 }
 

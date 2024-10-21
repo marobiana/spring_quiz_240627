@@ -29,4 +29,22 @@
 		FROM
 			`bookmark`
 	</select>
+	
+	<select id="selectBookmarkByUrl" parameterType="string" resultType="com.quiz.lesson06.domain.Bookmark">
+		SELECT
+			`id`
+			,`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`bookmark`
+		WHERE
+			`url` = #{url}
+	</select>
 </mapper>
+
+
+
+
+

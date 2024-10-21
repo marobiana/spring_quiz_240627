@@ -18,6 +18,7 @@
 					<th>번호</th>
 					<th>제목</th>
 					<th>URL</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,6 +28,7 @@
 					<td>
 						<a th:href="${bookmark.url}" target="_blank" th:text="${bookmark.url}"></a>
 					</td>
+					<td><button type="button" class="del-btn btn btn-danger">삭제</button></td>
 				</tr>			
 			</tbody>
 		</table>
