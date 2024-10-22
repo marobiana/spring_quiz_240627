@@ -45,7 +45,11 @@
 	        			<td th:text="${booking.day}">숙박일수</td>
 	        			<td th:text="${booking.headcount}">숙박인원</td>
 	        			<td th:text="${booking.phoneNumber}">전화번호</td>
-	        			<td th:text="${booking.state}">예약상태</td>
+	        			<td>
+	        				<span th:if="${booking.state == '대기중'}" class="text-info">대기중</span>
+	        				<span th:if="${booking.state == '확정'}" class="text-success">확정</span>
+	        				<span th:if="${booking.state == '취소'}" class="text-danger">취소</span>
+	        			</td>
 	        			<td><button type="button" class="del-btn btn btn-danger" th:data-booking-id="${booking.id}">삭제</button></td>
 	        		</tr>
 	        	</tbody>

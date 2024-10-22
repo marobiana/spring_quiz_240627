@@ -110,6 +110,15 @@
 	 				, data:{"name":name, "date":date, "day":day, "headcount":headcount, "phoneNumber":phoneNumber}
 	 				
 	 				// response
+	 				, success:function(data) {
+	 					// {"code":200, "result":"성공"}
+	 					if (data.code == 200) {
+	 						location.href = "/booking/booking-list-view";
+	 					}
+	 				}
+	 				, error:function(e) {
+	 					alert("예약하는데 실패했습니다.");
+	 				}
 	 			});
 	 		});
 	 	});
