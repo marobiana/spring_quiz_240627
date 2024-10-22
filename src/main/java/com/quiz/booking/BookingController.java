@@ -86,9 +86,32 @@ public class BookingController {
 		return result;
 	}
 	
+	// 3)
 	// 예약 조회 화면
 	@GetMapping("/check-booking-view")
 	public String checkBookingView() {
 		return "booking/checkBooking";
 	}
+	
+	// 예약 조회 - AJAX 요청
+	@ResponseBody
+	@PostMapping("/check-booking")
+	public Map<String, Object> checkBooking(
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber) {
+		
+		// DB select
+		Booking booking = bookingBO.getLatestBookingByNamePhoneNumber(name, phoneNumber);
+		
+		// 결과값 => Map에 담아 JSON (Model 사용 X)
+		// {"code":200, }
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		
+		return result;
+	}
 }
+
+
+
+

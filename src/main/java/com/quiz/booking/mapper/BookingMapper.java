@@ -23,4 +23,15 @@ public interface BookingMapper {
 			@Param("day") int day,
 			@Param("headcount") int headcount,
 			@Param("phoneNumber") String phoneNumber);
+	
+	// input: name, phoneNumber   => map
+	// output: List<Booking>
+	public List<Booking> selectBookingListByNamePhoneNumber(
+			@Param("name") String name,
+			@Param("phoneNumber") String phoneNumber);
 }
+
+
+
+
+
