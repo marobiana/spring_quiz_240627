@@ -39,14 +39,14 @@
 	        		</tr>
 	        	</thead>
 	        	<tbody>
-	        		<tr>
-	        			<td>이름</td>
-	        			<td>예약날짜</td>
-	        			<td>숙박일수</td>
-	        			<td>숙박인원</td>
-	        			<td>전화번호</td>
-	        			<td>예약상태</td>
-	        			<td></td>
+	        		<tr th:each="booking : ${bookingList}">
+	        			<td th:text="${booking.name}">[[${bookingList}]]</td>
+	        			<td th:text="${#temporals.format(booking.date, 'yyyy년 M월 d일')}">예약날짜</td>
+	        			<td th:text="${booking.day}">숙박일수</td>
+	        			<td th:text="${booking.headcount}">숙박인원</td>
+	        			<td th:text="${booking.phoneNumber}">전화번호</td>
+	        			<td th:text="${booking.state}">예약상태</td>
+	        			<td><button type="button" class="del-btn btn btn-danger" th:data-booking-id="${booking.id}">삭제</button></td>
 	        		</tr>
 	        	</tbody>
 	        </table>
@@ -59,5 +59,37 @@
 	        </small>
 	    </footer>
 	</div>
+	<script>
+		$(document).ready(function() {
+			// 삭제
+			$(".del-btn").on('click', function() {
+				let bookingId = $(this).data("booking-id");
+				//alert(bookingId);
+				
+				$.ajax({
+					// request
+					type:"delete"
+					, url:"/booking/delete-booking"
+					, data:{"id":bookingId}
+					
+					// response - callback
+					, success:function(data) {
+						// {"code":200, "result":"성공"}
+						if (data.result == "성공") {
+							// 새로고침
+							alert("삭제되었습니다.");
+							location.reload(true);
+						} else if (data.code == 500) {
+							// {"code":500, "error_message":"에러 이유"}
+							alert(data.error_message);
+						}
+					}
+					, error:function(e) {
+						alert("삭제하는데 실패했습니다.");
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
