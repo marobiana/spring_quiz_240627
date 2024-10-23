@@ -104,9 +104,16 @@ public class BookingController {
 		Booking booking = bookingBO.getLatestBookingByNamePhoneNumber(name, phoneNumber);
 		
 		// 결과값 => Map에 담아 JSON (Model 사용 X)
-		// {"code":200, }
+		// {"code":200, "result":booking}
+		// {"code":200, "result":{"id":3, "name":"신보람"...}}
 		Map<String, Object> result = new HashMap<>();
-		result.put("code", 200);
+		if (booking != null) {
+			result.put("code", 200);
+			result.put("result", booking);
+		} else {
+			result.put("code", 500);
+			result.put("error_message", "예약 내역이 없습니다.");
+		}
 		
 		return result;
 	}

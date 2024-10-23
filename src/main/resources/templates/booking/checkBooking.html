@@ -91,8 +91,14 @@
 					
 					// response
 					, success:function(data) {
-						if (data.code == 200) {
-							alert("성공");
+						if (data.code == 200) { // 예약 내역 있음
+							alert("이름:" + data.result.name 
+									+ "\n날짜:" + data.result.date
+									+ "\n일수:" + data.result.day
+									+ "\n인원:" + data.result.headcount
+									+ "\n상태:" + data.result.state);
+						} else if (data.code == 500) { // 없음
+							alert(data.error_message);
 						}
 					}
 					, error:function(e) {
