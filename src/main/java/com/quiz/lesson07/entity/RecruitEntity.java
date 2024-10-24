@@ -1,5 +1,6 @@
 package com.quiz.lesson07.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,22 +21,31 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true) // 필드 수정 가능
+@Builder
 @Getter
+@Table(name = "recruit")
 @Entity
-@Table(name = "company")
-public class CompanyEntity {
+public class RecruitEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String name;
+	@Column(name = "companyId")
+	private int companyId;
 	
-	private String business;
+	private String position;
 	
-	private String scale;
+	private String responsibilities;
 	
-	private int headcount;
+	private String qualification;
+	
+	private String type;
+	
+	private String region;
+	
+	private int salary;
+	
+	private LocalDate deadline;
 	
 	@CreationTimestamp
 	@Column(name = "createdAt")
